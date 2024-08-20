@@ -41,5 +41,10 @@ _Notes:_
 2. The at notation for imports assume the root path as `src` when resolving paths, therefore it must be omitted `@/src/components/...` -> `@/components/`.
 
 
+### Tailwind
 
+When working with tailwind on vscode, the following plugins are of importance to ease our lives:
+
+1. PostCSS Language Support
+2. Tailwind CSS IntelliSense
 
