@@ -77,3 +77,13 @@ This plugin enforces a standard import order.
 
 1. `npm i -D eslint-plugin-simple-import-sort`  
 2. add config to `.eslintrc.json` [reference](https://github.com/lydell/eslint-plugin-simple-import-sort)
+
+
+### Application Routing
+
+React router dom is the most widely used routing lib for react (though TanStack Router is gaining popularity).
+
+`npm install react-router-dom `
+
+[Reference](https://reactrouter.com/en/main/start/tutorial)
+
