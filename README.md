@@ -87,3 +87,19 @@ React router dom is the most widely used routing lib for react (though TanStack 
 
 [Reference](https://reactrouter.com/en/main/start/tutorial)
 
+
+#### Layouts
+
+When there are many pages that have the same visual elements like header, menus, footers, etc, it's possible to define a layout to avoid code duplication (and avoid unnecessary re-renderings).
+
+
+The steps to define and use a layout is:
+
+1. define the layout element and add an <Outlet /> element where the specific content of that route will be rendered
+2. Go to the application routes and define a route with path and element attributes (the element has to be the layout defined above)
+3. Within the previous definition add a children attribute (sibling to path and element) and define its path and element attributes (as though it was on root level)
+
+React router dom will render the element defined in the children attribute where the outlet element was added whenever that path is accessed.
+
+
+
