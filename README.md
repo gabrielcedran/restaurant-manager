@@ -102,4 +102,12 @@ The steps to define and use a layout is:
 React router dom will render the element defined in the children attribute where the outlet element was added whenever that path is accessed.
 
 
+### SEO when there is no SSR
+
+React helmet (react helmet async is a fork still under maintenance) allows Single Page Applications to update their head metatags, which is extremely useful for SEO engines and sometimes painful when no SSR is available.
+
+
+`npm i react-helmet-async` [reference](https://github.com/staylor/react-helmet-async)
+
+
 
