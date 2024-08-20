@@ -48,3 +48,32 @@ When working with tailwind on vscode, the following plugins are of importance to
 1. PostCSS Language Support
 2. Tailwind CSS IntelliSense
 
+
+### ESLint and prettier
+
+Installation:
+
+1. `npx install-peerdeps --dev eslint-config-airbnb` - careful with the new eslint config version as it is incompatible with old shared configs (and the old version with the new typescript versions :P)  
+2. create a `.eslintrc.json` and the following `{ "extends": ["airbnb", "airbnb/hooks"] }`
+
+or
+
+1. `npm i eslint@8.55.0 @rocketseat/eslint-config@2.1.0 -D`
+2. `{ "extends": ["@rocketseat/eslint-config/react"] }`
+
+Running eslint on the command line `npx eslint --ext .tsx,.ts . {--fix}` 
+
+#### Tailwind prettier plugin
+
+This plugin enforces the correct order when declaring styles.
+
+1. `npm i -D prettier-plugin-tailwindcss`
+2. create a `prettier.config.cjs` [reference](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)
+
+
+#### Import sort plugin
+
+This plugin enforces a standard import order.
+
+1. `npm i -D eslint-plugin-simple-import-sort`  
+2. add config to `.eslintrc.json` [reference](https://github.com/lydell/eslint-plugin-simple-import-sort)
