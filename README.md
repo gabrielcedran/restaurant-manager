@@ -39,7 +39,7 @@ _Notes:_
 
 1. React Server Components are frameworks that provide SSR like next.js, etc.
 2. The at notation for imports assume the root path as `src` when resolving paths, therefore it must be omitted `@/src/components/...` -> `@/components/`.
-
+3. To change the theme, go to shadcn-ui website, find a theme (or customise one), copy the styles and replace on the global.css file.
 
 ### Tailwind
 
