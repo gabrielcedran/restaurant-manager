@@ -2,10 +2,9 @@
 
 This project is a restaurament management app to study react js and its main concepts and libs like tailwind css, shadcn/ui and react-query (caching, data invalidation, data sync, optimistic updates, etc).
 
-
 ### Shadcn/ui
 
-This lib provides a myriad of ready to use and pre-styled components that adhere to good practices like accessibility and UI/UX concepts and standards. 
+This lib provides a myriad of ready to use and pre-styled components that adhere to good practices like accessibility and UI/UX concepts and standards.
 It speeds up development when custom visual identity is not a strong requirement as developers do not have to style everything from scratch.
 
 It's built on top of other libs like `radix-ui`, which provides unstyled/primitive accessible components, `cmdk`, which is a lib for standardised and well strucutured actions, etc.
@@ -16,7 +15,6 @@ It's built on top of other libs like `radix-ui`, which provides unstyled/primiti
 4. `npm i -D @types/node`
 5. change `vite.config.ts`
 6. `npx shadcn-ui@latest init`
-
 
 Ps: These changes are meant to enable imports with `@/something` instead of relative paths `../../something`. Changes on `tsconfig.*` files are meant to enabled the IDEs to understand these imports, while the one on `vite.config.ts` for the build tool (and convert them to valid js).
 
@@ -34,7 +32,6 @@ Example of how to install the button components:
 
 [Reference](https://ui.shadcn.com/docs/components/button`)
 
-
 _Notes:_
 
 1. React Server Components are frameworks that provide SSR like next.js, etc.
@@ -48,12 +45,11 @@ When working with tailwind on vscode, the following plugins are of importance to
 1. PostCSS Language Support
 2. Tailwind CSS IntelliSense
 
-
 ### ESLint and prettier
 
 Installation:
 
-1. `npx install-peerdeps --dev eslint-config-airbnb` - careful with the new eslint config version as it is incompatible with old shared configs (and the old version with the new typescript versions :P)  
+1. `npx install-peerdeps --dev eslint-config-airbnb` - careful with the new eslint config version as it is incompatible with old shared configs (and the old version with the new typescript versions :P)
 2. create a `.eslintrc.json` and the following `{ "extends": ["airbnb", "airbnb/hooks"] }`
 
 or
@@ -61,7 +57,7 @@ or
 1. `npm i eslint@8.55.0 @rocketseat/eslint-config@2.1.0 -D`
 2. `{ "extends": ["@rocketseat/eslint-config/react"] }`
 
-Running eslint on the command line `npx eslint --ext .tsx,.ts . {--fix}` 
+Running eslint on the command line `npx eslint --ext .tsx,.ts . {--fix}`
 
 #### Tailwind prettier plugin
 
@@ -70,14 +66,12 @@ This plugin enforces the correct order when declaring styles.
 1. `npm i -D prettier-plugin-tailwindcss`
 2. create a `prettier.config.cjs` [reference](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)
 
-
 #### Import sort plugin
 
 This plugin enforces a standard import order.
 
-1. `npm i -D eslint-plugin-simple-import-sort`  
+1. `npm i -D eslint-plugin-simple-import-sort`
 2. add config to `.eslintrc.json` [reference](https://github.com/lydell/eslint-plugin-simple-import-sort)
-
 
 ### Application Routing
 
@@ -87,11 +81,9 @@ React router dom is the most widely used routing lib for react (though TanStack 
 
 [Reference](https://reactrouter.com/en/main/start/tutorial)
 
-
 #### Layouts
 
 When there are many pages that have the same visual elements like header, menus, footers, etc, it's possible to define a layout to avoid code duplication (and avoid unnecessary re-renderings).
-
 
 The steps to define and use a layout is:
 
@@ -101,13 +93,12 @@ The steps to define and use a layout is:
 
 React router dom will render the element defined in the children attribute where the outlet element was added whenever that path is accessed.
 
-
 ### SEO when there is no SSR
 
 React helmet (react helmet async is a fork still under maintenance) allows Single Page Applications to update their head metatags, which is extremely useful for SEO engines and sometimes painful when no SSR is available.
 
-
 `npm i react-helmet-async` [reference](https://github.com/staylor/react-helmet-async)
 
+### Forms
 
-
+Uncontrolled forms with react hook form and zod: `npm i react-hook-form zod @hookform/resolvers`.
