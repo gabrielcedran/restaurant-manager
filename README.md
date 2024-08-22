@@ -102,3 +102,9 @@ React helmet (react helmet async is a fork still under maintenance) allows Singl
 ### Forms
 
 Uncontrolled forms with react hook form and zod: `npm i react-hook-form zod @hookform/resolvers`.
+
+### Toasts
+
+Shadcn/ui provides a toast component however for the purpose of experimenting, this project will use a lib called `Sonner`.
+
+`npm i sonner`

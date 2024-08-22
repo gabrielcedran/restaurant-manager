@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -24,6 +25,17 @@ export function SignIn() {
 
   async function handleSignIn(data: SignInForm) {
     await new Promise((resolve) => setTimeout(resolve, 1000))
+    toast.success(
+      'A magic link has been sent to your email to complete the login.',
+      {
+        action: {
+          label: 'Resend',
+          onClick: () => {
+            handleSignIn(data)
+          },
+        },
+      },
+    )
     console.log(data)
   }
 
