@@ -45,6 +45,21 @@ When working with tailwind on vscode, the following plugins are of importance to
 1. PostCSS Language Support
 2. Tailwind CSS IntelliSense
 
+#### Notes
+
+##### Data attributes
+
+It's possible to define `data-` attributes on html elements and use them when styling with tailwind:
+
+```javascript
+<Link
+  data-status={status}
+  className="... data-[active=abc]:hover:text-foreground"
+>
+  ...
+</Link>
+```
+
 ### ESLint and prettier
 
 Installation:
