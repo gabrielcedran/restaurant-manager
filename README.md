@@ -108,3 +108,14 @@ Uncontrolled forms with react hook form and zod: `npm i react-hook-form zod @hoo
 Shadcn/ui provides a toast component however for the purpose of experimenting, this project will use a lib called `Sonner`.
 
 `npm i sonner`
+
+### Slots (Radix slots)
+
+When working with Radix components (shadcn uses radix under the hook), it's possible to make use of a concept called slot.
+In a nutshell, it allows developers to keep all styles of a given component but changing its tag (element) - e.g make a link look exactly like a button. _It passes all the properties that a given component would have to its first child_.
+
+```javascript
+<Button asChild>
+  <Link to="/sign-up">Create new restaurant</Link>
+</Button>
+```
