@@ -134,3 +134,17 @@ In a nutshell, it allows developers to keep all styles of a given component but 
   <Link to="/sign-up">Create new restaurant</Link>
 </Button>
 ```
+
+### Charts
+
+Shadcn provides chart components but for the purposes of studies, I'll use Recharts (which is used by shadcn under the hood).
+
+To use Tailwind colors outside Tailwind styling, import the colours and then access them as a map:
+
+```javascript
+import colors from "tailwindcss/colors";
+
+colors.violet["500"];
+
+colors["violet"]["500"];
+```
