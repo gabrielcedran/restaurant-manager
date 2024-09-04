@@ -148,3 +148,26 @@ colors.violet["500"];
 
 colors["violet"]["500"];
 ```
+
+### Bun
+
+Bun is all-in-one javascript toolkit (development, bundler, runtime, etc) alternative to NodeJS. It's built on top of the Javascript Core, which is the JS engine used by Safari, React Native, and other programs and tools (mostly used by Apple) - opposed to Node, which is built on top of the Chrome/Webkit V8.
+
+It's been presenting overall better performance than NodeJS and runs on any OS (only caveat is to use WSL on windows for better compatibility).
+
+Installation for Mac [reference](https://bun.sh/):
+
+`curl -fsSL https://bun.sh/install | bash`
+
+#### Restaurant Manager API:
+
+API used in this project: https://github.com/rocketseat-education/pizzashop-api.git
+
+Set up:
+
+1. create a `.env.local` file in the root directory and copy the content of the `.env.local.example`
+2. set up a postgres db (docker-compose file in the root directory of the api source - `docker compose up -d`)
+3. install all the dependencies using bun (`bun i`)
+4. run all the migrations (`bun migrate`) - ignore `resend_api_key` for now (just add any value to it)
+5. run `bun seed` to reset and prepopulate the db. _ps: open seed.ts and change the created user's email_
+6. start the application with `bun dev`
