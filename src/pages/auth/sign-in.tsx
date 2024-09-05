@@ -1,10 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
+import { signIn } from '@/api/sign-in'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -16,6 +18,10 @@ const signInFormSchema = z.object({
 type SignInForm = z.infer<typeof signInFormSchema>
 
 export function SignIn() {
+  const { mutateAsync: authenticate } = useMutation({
+    mutationFn: signIn,
+  })
+
   const {
     register,
     handleSubmit,
@@ -25,7 +31,8 @@ export function SignIn() {
   })
 
   async function handleSignIn(data: SignInForm) {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await authenticate({ email: data.email })
+
     toast.success(
       'A magic link has been sent to your email to complete the login.',
       {

@@ -214,7 +214,7 @@ export const api = axios.create({
 
 In a nutshell, react query is a series of hooks to ease requests between front and backend where it provides memoisation of the requests between components (e.g component A and B perform the same request to load a list of resources).
 
-It also provides many other features and concepts like proper handling of server state management (opposed to general purpose state management libs like redux), opinionated way of fetching and updating data (providing standardisation), automatic stale data update, etc.
+It also provides many other features and concepts like proper handling of server state management (opposed to general purpose state management libs like redux), opinionated way of fetching and updating data (providing standardisation), automatic stale data update, retry mechanism, backoff, etc.
 
 `npm i @tanstack/react-query`
 
@@ -232,4 +232,29 @@ Wrap the components that will need to fetch data from the BE with QueryClientPro
 
 ```javascript
 <QueryClientProvider client={queryClient}>...</QueryClientProvider>
+```
+
+#### Concepts
+
+Whenever performing server side operations, you need to wrap react-query around the actual request, so that it can plug in and offer its features.
+
+`Mutations:`
+
+Every time an operation that is not a fetch (query) operation (so PUT, POST, DELETE, PATCH), it's necessary to use the `useMutation` hook.
+
+```javascript
+  // renaming mutateAsync is a good practice as (1) improves redability where it is called and (2)
+  // you might have more than just one request in that component
+  const { mutateAsync: authenticate } = useMutation({
+    mutationFn: signIn,
+  })
+
+  ...
+
+  async function handleSignIn(data: SignInForm) {
+
+    await authenticate({ email: data.email })
+    ...
+  }
+
 ```
