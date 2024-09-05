@@ -171,3 +171,41 @@ Set up:
 4. run all the migrations (`bun migrate`) - ignore `resend_api_key` for now (just add any value to it)
 5. run `bun seed` to reset and prepopulate the db. _ps: open seed.ts and change the created user's email_
 6. start the application with `bun dev`
+
+### Environment Variable
+
+Vite requires that environment variables start with `VITE_`.
+
+To use the variables, simply use `import.meta.env.BASE_URL` directly in the code (ps: the traditional `process...` is how node handles env variables. `import` is Vite's). However this approach does not provide any certainty that the used variable exists.
+
+Alternatively the following can be done, using zod:
+
+create a file (here I named env.ts) and use zod to validate the environment variables:
+
+```javascript
+import { z } from "zod";
+
+const envSchema = z.object({
+  VITE_API_URL: z.string().url(),
+});
+
+export const env = envSchema.parse(import.meta.env);
+```
+
+Parse ensures that what is being passed as parameter has the structure defined by the schema. If it doesn't it won't even let the application start.
+
+```javascript
+import { env } from "@/env";
+
+export const api = axios.create({
+  baseURL: env.VITE_API_URL,
+});
+
+// vs
+
+import { env } from "@/env";
+
+export const api = axios.create({
+  baseURL: import.meta.env.BASE_URL,
+});
+```
