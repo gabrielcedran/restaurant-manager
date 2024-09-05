@@ -209,3 +209,27 @@ export const api = axios.create({
   baseURL: import.meta.env.BASE_URL,
 });
 ```
+
+### React Query
+
+In a nutshell, react query is a series of hooks to ease requests between front and backend where it provides memoisation of the requests between components (e.g component A and B perform the same request to load a list of resources).
+
+It also provides many other features and concepts like proper handling of server state management (opposed to general purpose state management libs like redux), opinionated way of fetching and updating data (providing standardisation), automatic stale data update, etc.
+
+`npm i @tanstack/react-query`
+
+Basic setup:
+
+Create a QueryClient in a react-query.ts file:
+
+```javascript
+import { QueryClient } from "@tanstack/react-query";
+
+export const queryClient = new QueryClient();
+```
+
+Wrap the components that will need to fetch data from the BE with QueryClientProvider (usually a high level component):
+
+```javascript
+<QueryClientProvider client={queryClient}>...</QueryClientProvider>
+```
