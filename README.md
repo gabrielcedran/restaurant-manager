@@ -261,13 +261,29 @@ Every time an operation that is not a fetch (query) operation (so PUT, POST, DEL
 
 `Query (data fetch)`:
 
-In order to perform fetch operations it's necessary to use the `useQuery` hook. It works similarly to the mutation hook, however it has (and supports) a couple of extra details:
+In order to perform fetch operations it's necessary to use the `useQuery` hook. It works similarly to the mutation hook, however it has (and supports) a couple of extra details and functionalities:
 
 - `queryKey`: used to prevent different parts of the application from performing the same request again (de-duplication) - a kind of server-side cache
+- many properties with the request status like `isLoading`, `isError`, etc
 
 ```javascript
 const { data: profile } = useQuery({
   queryKey: ["profile"], // if this request is performed anywhere else in the app with the same key, the cached data is returned
   queryFn: getProfile,
 });
+```
+
+### Axios
+
+A hack to delay backend responses via axios to test loadings is to add a request interceptor that awaits for 1 second before proceeding with the request (and create a variable to only have it enabled for dev env):
+
+Request interceptors are executed before each request.
+
+```javascript
+if (env.VITE_ENABLE_API_DELAY) {
+  api.interceptors.request.use(async (config) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    return config;
+  });
+}
 ```
