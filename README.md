@@ -264,7 +264,11 @@ Every time an operation that is not a fetch (query) operation (so PUT, POST, DEL
 In order to perform fetch operations it's necessary to use the `useQuery` hook. It works similarly to the mutation hook, however it has (and supports) a couple of extra details and functionalities:
 
 - `queryKey`: used to prevent different parts of the application from performing the same request again (de-duplication) - a kind of server-side cache
+- `staleTime`: how long the data is valid before it needs refreshing (automatically handled by react query upon window focus) - enabled by default
+- `refetchOnWindowFocus` (default to true, works along with `staleTime`), `refetchOnMount`, `refetchOnInterval`, etc
 - many properties with the request status like `isLoading`, `isError`, etc
+
+_It's a good practice to change staleTime to `Infinity` for data that is not likely to change or not changed frequently_
 
 ```javascript
 const { data: profile } = useQuery({
