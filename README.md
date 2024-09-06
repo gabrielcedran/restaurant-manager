@@ -258,3 +258,16 @@ Every time an operation that is not a fetch (query) operation (so PUT, POST, DEL
   }
 
 ```
+
+`Query (data fetch)`:
+
+In order to perform fetch operations it's necessary to use the `useQuery` hook. It works similarly to the mutation hook, however it has (and supports) a couple of extra details:
+
+- `queryKey`: used to prevent different parts of the application from performing the same request again (de-duplication) - a kind of server-side cache
+
+```javascript
+const { data: profile } = useQuery({
+  queryKey: ["profile"], // if this request is performed anywhere else in the app with the same key, the cached data is returned
+  queryFn: getProfile,
+});
+```
