@@ -259,6 +259,18 @@ Every time an operation that is not a fetch (query) operation (so PUT, POST, DEL
 
 ```
 
+`onSuccess` is a parameter supported by useMutation that is meant to update cached data once a mutation takes place. It's a function that receives 3 parameters: 1. data (returned by the executed mutation function if any), 2. variables (data received as parameter by the mutation function), 3. context (extra stuff, investigate if necessary)
+
+```javascript
+useMutation({
+  mutationFn: x,
+  onSuccess(data, variables, context) {
+    ...
+    // see commit for more info including how to get and update cached data leveraging typescript (ref store-profile-dialog.tsx)
+  },
+});
+```
+
 `Query (data fetch)`:
 
 In order to perform fetch operations it's necessary to use the `useQuery` hook. It works similarly to the mutation hook, however it has (and supports) a couple of extra details and functionalities:
@@ -276,6 +288,14 @@ const { data: profile } = useQuery({
   queryFn: getProfile,
 });
 ```
+
+##### Concept
+
+Currently, react apps have 3 states:
+
+1. Local state (useState, useContext)
+2. Global state (redux, jotai, zustand)
+3. HTTP state (HTTP data, react query)
 
 ### Axios
 
