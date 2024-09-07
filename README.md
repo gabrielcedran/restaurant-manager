@@ -199,6 +199,7 @@ import { env } from "@/env";
 
 export const api = axios.create({
   baseURL: env.VITE_API_URL,
+  withCredentials: true, // used for authz (send all cookies back to the BE)
 });
 
 // vs
@@ -207,6 +208,7 @@ import { env } from "@/env";
 
 export const api = axios.create({
   baseURL: import.meta.env.BASE_URL,
+  withCredentials: true,
 });
 ```
 
@@ -235,6 +237,8 @@ Wrap the components that will need to fetch data from the BE with QueryClientPro
 ```
 
 #### Concepts
+
+##### Mutations
 
 Whenever performing server side operations, you need to wrap react-query around the actual request, so that it can plug in and offer its features.
 
@@ -270,6 +274,36 @@ useMutation({
   },
 });
 ```
+
+##### Optimistic UI
+
+It's a concept that consists of reacting to a change (or user input, or processing) before getting the confirmation that the change completed successfully from the BE (based on the premise that the in the vast majority of time it will in fact succeed). It helps to eliminate loadings.
+
+Example: when updating a user profile instead of waiting for the BE confirmation, the UI can simply confirm the operation and in case it ends up failing, go back and notify the user.
+
+React Query supports optimitic ui implementations via the `onMutate` parameter, which unlike the `onSuccess` is trigger as soon as the request is performed without waiting for the response.
+
+In case something unexpected happends, the `onError` call back is executed. It is possible to share data between the `onMutate` and `onError` via context:
+
+```javascript
+
+useMutation({
+  mutationFn: x,
+  onMutation(variables) { // careful as these are the variables received by `mutationFn`. If you want the current values, you'd have to get it from the cache: const cached = queryClient.getQueryData<??>(['cache'])
+
+    ... // update cache or do something else (more info see commit)
+
+    return {attr1: "value"} // this is shared with onError (and onSuccess)
+  },
+  onError(error, variables, context) {
+    ... // rollback cache update
+    context.attr1 // this comes from onError
+  }
+});
+
+```
+
+##### Queries
 
 `Query (data fetch)`:
 
