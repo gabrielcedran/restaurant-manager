@@ -118,6 +118,43 @@ React helmet (react helmet async is a fork still under maintenance) allows Singl
 
 Uncontrolled forms with react hook form and zod: `npm i react-hook-form zod @hookform/resolvers`.
 
+#### Non Native HTML elements
+
+When working with non native html elements (custom components or components provided by external libs like radix, shadcn, etc), it's necessary to register the component slightly differently. It is necessary to create a controller and then handle the changes appropriately, according to the component. Example:
+
+```javascript
+  const { ..., control } = useForm<OrderFiltersSchema>({
+    resolver: zodResolver(orderFiltersSchema),
+  })
+
+  ...
+
+  <Controller
+    name="{name}"
+    control={control}
+    render={({ field: { name, onChange, value, disabled, ... } }) => (
+      <Select
+        defaultValue="1"
+        name={name}
+        onValueChange={onChange}
+        value={value}
+        disabled={disabled}
+      >
+        <SelectTrigger>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="1">1</SelectItem>
+          <SelectItem value="2">2</SelectItem>
+        </SelectContent>
+      </Select>
+    )}
+  />
+
+```
+
+When the select component above changes the value, it calls the onChange provided by the controller which in turn propagates the change to react-hook-form, according to the defined `name` on the controller element.
+
 ### Toasts
 
 Shadcn/ui provides a toast component however for the purpose of experimenting, this project will use a lib called `Sonner`.
