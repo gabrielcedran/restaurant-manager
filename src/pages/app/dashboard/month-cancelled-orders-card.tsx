@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 export function MonthCancelledOrdersCard() {
   const { data: monthCanceledMetrics } = useQuery({
-    queryKey: ['metrics', 'month-canceled-metrics'],
+    queryKey: ['metrics', 'month-canceled'],
     queryFn: getMonthCanceledMetrics,
   })
 
