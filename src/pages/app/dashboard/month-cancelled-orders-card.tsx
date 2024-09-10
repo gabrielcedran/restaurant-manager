@@ -4,6 +4,8 @@ import { Utensils } from 'lucide-react'
 import { getMonthCanceledMetrics } from '@/api/get-month-canceled-metrics'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
+import { MetricsCardSkeleton } from './metrics-card-skeleton'
+
 export function MonthCancelledOrdersCard() {
   const { data: monthCanceledMetrics } = useQuery({
     queryKey: ['metrics', 'month-canceled'],
@@ -19,7 +21,7 @@ export function MonthCancelledOrdersCard() {
         <Utensils className="h4 w-4 text-muted-foreground" />
       </CardHeader>
       <CardContent className="space-y-1">
-        {monthCanceledMetrics && (
+        {monthCanceledMetrics ? (
           <>
             <span className="text-2xl font-bold tracking-tight">
               {monthCanceledMetrics.amount.toLocaleString('en-GB')}
@@ -42,6 +44,8 @@ export function MonthCancelledOrdersCard() {
               )}
             </p>
           </>
+        ) : (
+          <MetricsCardSkeleton />
         )}
       </CardContent>
     </Card>

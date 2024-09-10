@@ -4,6 +4,8 @@ import { DollarSign } from 'lucide-react'
 import { getMonthTurnoverMetrics } from '@/api/get-month-turnover-metrics'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
+import { MetricsCardSkeleton } from './metrics-card-skeleton'
+
 export function MonthRevenueCard() {
   const { data: monthTurnoverMetrics } = useQuery({
     queryKey: ['metrics', 'month-turnover'],
@@ -17,7 +19,7 @@ export function MonthRevenueCard() {
         <DollarSign className="h4 w-4 text-muted-foreground" />
       </CardHeader>
       <CardContent className="space-y-1">
-        {monthTurnoverMetrics && (
+        {monthTurnoverMetrics ? (
           <>
             <span className="text-2xl font-bold tracking-tight">
               {(monthTurnoverMetrics.receipt / 100).toLocaleString('en-GB', {
@@ -43,6 +45,8 @@ export function MonthRevenueCard() {
               )}
             </p>
           </>
+        ) : (
+          <MetricsCardSkeleton />
         )}
       </CardContent>
     </Card>
