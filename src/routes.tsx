@@ -7,6 +7,7 @@ import { Dashboard } from './pages/app/dashboard/dashboard'
 import { Orders } from './pages/app/orders/orders'
 import { SignIn } from './pages/auth/sign-in'
 import { SignUp } from './pages/auth/sign-up'
+import { Error } from './pages/error'
 
 export const router = createBrowserRouter([
   {
@@ -22,11 +23,11 @@ export const router = createBrowserRouter([
         element: <Orders />,
       },
     ],
-    /* this errorElement is used for any error, therefore an error on a component
-     would redirect the user to a page no found, which is not ideal.
+    /* this errorElement is used for any error, therefore not ideal for handling page not found.
+     as any error would be treated as page not found.
      better approach below with path: '*', that captures everything else that is not
      captured by the other routes */
-    // errorElement: <NotFound />,
+    errorElement: <Error />,
   },
   {
     path: '/',
