@@ -22,7 +22,11 @@ export const router = createBrowserRouter([
         element: <Orders />,
       },
     ],
-    errorElement: <NotFound />,
+    /* this errorElement is used for any error, therefore an error on a component
+     would redirect the user to a page no found, which is not ideal.
+     better approach below with path: '*', that captures everything else that is not
+     captured by the other routes */
+    // errorElement: <NotFound />,
   },
   {
     path: '/',
@@ -37,5 +41,9 @@ export const router = createBrowserRouter([
         element: <SignUp />,
       },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ])
