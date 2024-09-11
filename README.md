@@ -382,3 +382,89 @@ if (env.VITE_ENABLE_API_DELAY) {
   });
 }
 ```
+
+## Automated Tests
+
+### Unit tests
+
+#### Vitest
+
+`Vitest` is a vite-native testing framework. Installation:
+
+1. `npm install -D vitest`
+2. `npx vitest` or in packege.json create a "test" script (`"test": "vitest"`)
+
+##### Globals
+
+It allows developers to use vitest's global features like `it`, `expect`, `beforeEach` without having to import them. To set it up, do the following steps:
+
+- inside `vite.config.ts` add a new entry called `test` with the following content:
+
+```javascript
+
+import type { UserConfig } from 'vite'
+import type { InlineConfig } from 'vitest/node'
+
+export default defineConfig({
+  ...
+  test: {
+    globals: true,
+  },
+} as UserConfig & { test: InlineConfig }) // it is necessary to extend the typescript definition to avoid compilation errors
+
+```
+
+_it is possible to set up this configuration in a separate `vitest.config.ts` if you are not use vitejs_
+
+- inside `compilerOptions` of the `tsconfig.json` (or `tsconfig.app.json`) file, add the entry `"types": ["vitest/globals"]`.
+
+##### Creating tests
+
+It follows the same style of other testing frameworks. Files with suffix `*.spec.tsx` are automatically picked up by the lib.
+
+#### Testing Library
+
+It's a lib that eases test creation for many tools like react, react native, svelte, angular by allowing developers to assert dom elements (following each lib specifics).
+
+With `vitest` alone it's not possible to verify if a given element is on the screen, if it has a given attribute or css style, etc. because it is not developed to run specifically on a web enviroment (or any specific environment).
+
+Testing library adds this support to vitest.
+
+`npm install -D @testing-library/react`
+
+##### jest-dom:
+
+`jest-dom` is a companion lib that provides custom DOM element matchers.
+
+_testing library works in many different environments as mentioned above (including non web ones). Therefore extending its basic functionality for more fluid assertions for web is recommended._
+
+Installation:
+
+`npm install -D @testing-library/jest-dom`
+
+create a `test/setup.ts` in the root directory and add the following line: `import '@testing-library/jest-dom/vitest'`
+
+In the "test" attribute of the `vite.config.ts` add the following entry: `setupFiles: ['./test/setup.ts'],`
+
+In the `include` of the `tsconfig.app.json`, include the entry `"test"` (it enables the IDEs to add auto complete with jest-dom features).
+
+_jest-dom was originally made for jest (another common testing framework), therefore it's necessary do adapt it to vitest_
+
+**To test the configuration, create a dummy test anywhere and run the tests**
+
+##### jsdom vs happy dom
+
+**warning, this step is not necessary at all since vitest works with jsdom out of the box**
+
+When running FE tests, you usually need a mechanism to render the interface and handle the simulation of user actions (for instance, the click of a button).
+
+When running unit tests, you don't have a headless browser running under the hood like on E2E tests (and you don't want it, as it would slow the tests down considerably).
+
+The traditional approach for unit tests is to use a tool that emulates a DOM (with html, css and js). The most famous lib for this is `jsdom`, which is the default lib for `jest` and `vitest`, however `happy dom` has been gaining popularity as it performs better.
+
+Happy dom works with popular libs like react, angular, vue, etc.
+
+Setup:
+
+1. `npm install -D happy-dom`
+2. Inside the `test` attribute of the `vite.config.js` file, add the entry `environment: 'happy-dom'`
