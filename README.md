@@ -432,6 +432,20 @@ Testing library adds this support to vitest.
 
 `npm install -D @testing-library/react`
 
+##### Concepts
+
+**find vs get vs query functions**
+
+`find`: returns a promise - usually used for elements that renders asynchronously or slowly
+
+`get`: looks for the element and returns an error if nothing matching is found.
+
+`query`: looks for the element and doesn't return an error if nothing matching is found.
+
+**render**
+
+Calling the function `render` multiple times within the same test context only appends the rendered content. It does not override the content.
+
 ##### jest-dom:
 
 `jest-dom` is a companion lib that provides custom DOM element matchers.
