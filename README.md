@@ -494,3 +494,9 @@ Setup:
 #### Spies
 
 To create spiable functions, simply use `vi.fn()`. `vi` is also a global variable provided by vitest.
+
+#### Wrappers
+
+When running unit tests, the components are executed in isolation therefore there is no context providers available.
+When a component needs access to a context provider (e.g RouterProvider), the `render` function accepts a second
+parameter that is a config json, which has a `wrapper` property. This property can be used to set up context providers (e.g MemoryRouter).
