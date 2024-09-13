@@ -466,6 +466,14 @@ _jest-dom was originally made for jest (another common testing framework), there
 
 **To test the configuration, create a dummy test anywhere and run the tests**
 
+**getByRole uses the roles defined by the [aria-role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques) attribute specification. The `name` provided in the options json is actually the content of the element.**
+
+##### User events
+
+This is yet another convenience lib in order to interact with components simulating user actions:
+
+`npm i -D @testing-library/user-event`
+
 ##### jsdom vs happy dom
 
 **warning, this step is not necessary at all since vitest works with jsdom out of the box**
@@ -482,3 +490,7 @@ Setup:
 
 1. `npm install -D happy-dom`
 2. Inside the `test` attribute of the `vite.config.js` file, add the entry `environment: 'happy-dom'`
+
+#### Spies
+
+To create spiable functions, simply use `vi.fn()`. `vi` is also a global variable provided by vitest.

@@ -38,7 +38,7 @@ export function Pagination({
             disabled={pageIndex === 0}
           >
             <ChevronsLeft className="h-4 w-4" />
-            <span className="sr-only">Fist page</span>
+            <span className="sr-only">First page</span>
           </Button>
           <Button
             variant="outline"
