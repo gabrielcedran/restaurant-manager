@@ -500,3 +500,22 @@ To create spiable functions, simply use `vi.fn()`. `vi` is also a global variabl
 When running unit tests, the components are executed in isolation therefore there is no context providers available.
 When a component needs access to a context provider (e.g RouterProvider), the `render` function accepts a second
 parameter that is a config json, which has a `wrapper` property. This property can be used to set up context providers (e.g MemoryRouter).
+
+### MSW - Mock Service Worker
+
+The biggest advantage of the MSW over other mocking libs (like miragejs) is that is doesn't fully replace the http request with the mocked response (causing it to never leave the local env).
+It uses a Service Worker to `intercept` requests and provide the response as though it came from the actual server, therefore the requests are `real` http requests
+and show up in the Network tab of the dev tools.
+
+Installation:
+
+1. `npm i -D msw`
+2. `npx msw init public` (public is the dir where the public asserts are)
+3. answer yes
+4. create a [config file](./src/api/mocks/index.ts) in order to boot the MSW when necessary (by calling the function `enableMSW`)
+5. create a convenience script on `package.json` to start the application in "mock" mode (`dev:mock` in the project) (or run manually `npx vite --mode mocked`)
+6. call `enableMSW` (defined on step 4) and on the promise resolution (`then`) start the react app
+
+_The init step creates a script under `public` directory (`mockServiceWorker.js`). This script attaches the necessary listeners in order to mock responses according to the mock definitions._
+
+_To test that the installation was successful, open the console and try to find a message that says `[MSW] Mocking enabled.`_
