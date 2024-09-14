@@ -519,3 +519,10 @@ Installation:
 _The init step creates a script under `public` directory (`mockServiceWorker.js`). This script attaches the necessary listeners in order to mock responses according to the mock definitions._
 
 _To test that the installation was successful, open the console and try to find a message that says `[MSW] Mocking enabled.`_
+
+In order to enable MSW to intercept requests, they have to be made to the same address where the frontend is being served (not to the actual url of the backend).
+To set this up, created a `.env.mocked` file and change the `VITE_API_URL` to `/`.
+
+- `/` means that the requests will be made to the same URL of the application.
+
+- the `.mocked` suffix of the `.env.mocked` has to match the vite mode. This is how vite look for `.env` files - matching mode (p.s the default one is `development`).
