@@ -526,3 +526,11 @@ To set this up, created a `.env.mocked` file and change the `VITE_API_URL` to `/
 - `/` means that the requests will be made to the same URL of the application.
 
 - the `.mocked` suffix of the `.env.mocked` has to match the vite mode. This is how vite look for `.env` files - matching mode (p.s the default one is `development`).
+
+### Playwright
+
+Follow installation guidelines directly on the official website. Most important configs to tweak: `use.baseURL`, `webServer.command` (how to start the app) and `webServer.url`.
+
+_webServer_ is important if you want playwright to boot your local server. If you are pointing it somewhere else, you don't want to set it up.
+
+Running: headless:`npx playwright test` - headed: `npx playwright test --headed` or `npx playwright test --ui` (to debug).
