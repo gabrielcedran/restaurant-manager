@@ -2,7 +2,11 @@ import { setupWorker } from 'msw/browser'
 
 import { env } from '@/env'
 
+import { approveOrderMock } from './approve-order-mock'
+import { cancelOrderMock } from './cancel-order-mock'
+import { completeOrderMock } from './complete-order-mock'
 import { createRestaurantMock } from './create-restaurant-mock'
+import { dispatchOrderMock } from './dispatch-order-mock'
 import { getDailyTurnoverMetricsMock } from './get-daily-turnover-mock'
 import { getDayOrdersMetricsMock } from './get-day-orders-metrics-mock'
 import { getManagedRestaurantMock } from './get-managed-restaurant.mock'
@@ -30,6 +34,10 @@ export const worker = setupWorker(
   updateProfileMock,
   getOrdersMock,
   getOrderDetailsMock,
+  approveOrderMock,
+  cancelOrderMock,
+  completeOrderMock,
+  dispatchOrderMock,
 )
 
 export async function enableMSW() {
