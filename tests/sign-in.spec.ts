@@ -10,7 +10,7 @@ test('sign in successfully', async ({ page }) => {
     'A magic link has been sent to your email to complete the login.',
   )
 
-  expect(toast).toBeVisible()
+  await expect(toast).toBeVisible()
 
   // hack to wait for last frame to be rendered no the ui recorder - bug of the last step
   // await page.waitForTimeout(2000)
