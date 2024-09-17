@@ -25,9 +25,6 @@ test('sign in with wrong credentials', async ({ page }) => {
   const toast = page.getByText('Invalid credentials.')
 
   expect(toast).toBeVisible()
-
-  // hack to wait for last frame to be rendered no the ui recorder - bug of the last step
-  // await page.waitForTimeout(2000)
 })
 
 test('navigate to restaurant sign up page', async ({ page }) => {
@@ -37,7 +34,4 @@ test('navigate to restaurant sign up page', async ({ page }) => {
 
   expect(page.url()).toContain('/sign-up')
   expect(page.getByText('Create a new restaurantCreate')).toBeVisible()
-
-  // hack to wait for last frame to be rendered no the ui recorder - bug of the last step
-  // await page.waitForTimeout(2000)
 })

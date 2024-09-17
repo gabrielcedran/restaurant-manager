@@ -1,43 +1,42 @@
 import { expect, test } from '@playwright/test'
 
-test('sign in successfully', async ({ page }) => {
-  await page.goto('/sign-in', { waitUntil: 'networkidle' })
+test('sign up successfully', async ({ page }) => {
+  await page.goto('/sign-up', { waitUntil: 'networkidle' })
 
-  await page.getByLabel('Email Address').fill('don@bob.com')
-  await page.getByRole('button', { name: 'Log in' }).click()
+  await page.getByLabel('Restaurant Name').fill('Don Bob Diner')
+  await page.getByLabel('Your name').fill('Don Bob')
+  await page.getByLabel('Phone').fill('38712741')
+  await page.getByLabel('Email').fill('don.bob@diner.shop')
+
+  await page.getByRole('button', { name: 'Sign up' }).click()
+
+  const toast = page.getByText('Sign up completed successfully')
+  expect(toast).toBeVisible()
+
+  // hack to wait for last frame to be rendered no the ui recorder - bug of the last step
+  // await page.waitForTimeout(2000)
+})
+
+test('sign up with invalid data', async ({ page }) => {
+  await page.goto('/sign-up', { waitUntil: 'networkidle' })
+
+  await page.getByLabel('Restaurant Name').fill('Invalid Name')
+  await page.getByLabel('Your name').fill('Don Bob')
+  await page.getByLabel('Phone').fill('38712741')
+  await page.getByLabel('Email').fill('don.bob@diner.shop')
+
+  await page.getByRole('button', { name: 'Sign up' }).click()
 
   const toast = page.getByText(
-    'A magic link has been sent to your email to complete the login.',
+    'Something unexpected happened while registering. Please try again.',
   )
-
   expect(toast).toBeVisible()
-
-  // hack to wait for last frame to be rendered no the ui recorder - bug of the last step
-  // await page.waitForTimeout(2000)
 })
 
-test('sign in with wrong credentials', async ({ page }) => {
-  await page.goto('/sign-in', { waitUntil: 'networkidle' })
+test('navigate to login page', async ({ page }) => {
+  await page.goto('/sign-up', { waitUntil: 'networkidle' })
 
-  await page.getByLabel('Email Address').fill('bob@don.com')
-  await page.getByRole('button', { name: 'Log in' }).click()
+  await page.getByRole('link', { name: 'Already have an account?' }).click()
 
-  const toast = page.getByText('Invalid credentials.')
-
-  expect(toast).toBeVisible()
-
-  // hack to wait for last frame to be rendered no the ui recorder - bug of the last step
-  // await page.waitForTimeout(2000)
-})
-
-test('navigate to restaurant sign up page', async ({ page }) => {
-  await page.goto('/sign-in', { waitUntil: 'networkidle' })
-
-  await page.getByRole('link', { name: 'New Restaurant' }).click()
-
-  expect(page.url()).toContain('/sign-up')
-  expect(page.getByText('Create a new restaurantCreate')).toBeVisible()
-
-  // hack to wait for last frame to be rendered no the ui recorder - bug of the last step
-  // await page.waitForTimeout(2000)
+  expect(page.url()).toContain('/sign-in')
 })
