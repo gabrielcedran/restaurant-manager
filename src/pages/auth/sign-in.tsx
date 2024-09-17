@@ -34,20 +34,23 @@ export function SignIn() {
   })
 
   async function handleSignIn(data: SignInForm) {
-    await authenticate({ email: data.email })
+    try {
+      await authenticate({ email: data.email })
 
-    toast.success(
-      'A magic link has been sent to your email to complete the login.',
-      {
-        action: {
-          label: 'Resend',
-          onClick: () => {
-            handleSignIn(data)
+      toast.success(
+        'A magic link has been sent to your email to complete the login.',
+        {
+          action: {
+            label: 'Resend',
+            onClick: () => {
+              handleSignIn(data)
+            },
           },
         },
-      },
-    )
-    console.log(data)
+      )
+    } catch {
+      toast.error('Invalid credentials.')
+    }
   }
 
   return (
