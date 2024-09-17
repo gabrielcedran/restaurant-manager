@@ -543,3 +543,5 @@ Running: headless:`npx playwright test` - headed: `npx playwright test --headed`
 json which allows you to determine until when the test should wait. Example: `await page.goto('/{what-ever}', { waitUntil: 'networkidle' })`
 
 **waiting for http requests to complete**: whenever a http requests is performed, it's possible to instruct playwright to wait for it to complete with the command `await page.waitForLoadState('networkidle')`.
+
+**get multiple elements**: by default `await page.getByRole(...)` only returns the first element. However calling the `all()` gets all elements that match the criteria: `await page.getByRole(...).all()`
