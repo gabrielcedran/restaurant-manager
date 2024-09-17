@@ -541,3 +541,5 @@ Running: headless:`npx playwright test` - headed: `npx playwright test --headed`
 
 **page loading**: when the test navigates to a given page, it doesn't mean that the test will wait for it to finish loading. `page.goto` takes a second parameter that is a config
 json which allows you to determine until when the test should wait. Example: `await page.goto('/{what-ever}', { waitUntil: 'networkidle' })`
+
+**waiting for http requests to complete**: whenever a http requests is performed, it's possible to instruct playwright to wait for it to complete with the command `await page.waitForLoadState('networkidle')`.
